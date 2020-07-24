@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = [
     path('list/', views.task_listing),
-    path('tietoa/', views.tietoa)
+    path('tietoa/', views.tietoa),
+    path('insert_task/', views.insert_task_item, name='insert_task_item')
 ]

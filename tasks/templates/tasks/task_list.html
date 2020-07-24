@@ -19,6 +19,7 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-10">
+
                 <div class="card">
                     <div class="card-header shadow-sm bg-white">
                         <h1 class="display-5 text-info"><i class="fas fa-check-double "></i><span
@@ -27,25 +28,41 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="" autocomplete="off"></form>
-                        <input type="text" class="form-control" name="content"></input>
+                        <form action="{% url 'insert_task_item' %}" method="POST" autocomplete="off">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="content"
+                                    placeholder="type here to add task">
+                                <div class="input-group-append text-info">
+                                    <span class="input-group-text bg-white py-0">
+                                        <button type="submit" class="btn btn-sm text-info">
+                                            <i class="fa fa-plus-circle fa-lg"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+
+                        <ul class="list-group">
+                            {% for task in task_list %}
+                            <li class="list-group-item">{{ task.content }}</li>
+                            {% endfor %}
+                        </ul>
                     </div>
-
-
                 </div>
             </div>
         </div>
+    </div>
 
-
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
