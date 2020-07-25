@@ -1,4 +1,5 @@
 {% load static %}
+<!-- .js ja css jos olisi määritetty sellaisia -->
 
 <!DOCTYPE html>
 
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <!-- omat tyylit -->
+    <!-- omat tyylit jos olisi määritetty -->
     <link rel="stylesheet" href="{% static 'tasks/styles.css' %}">
 </head>
 
@@ -28,24 +29,37 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{% url 'insert_task_item' %}" method="POST" autocomplete="off">
-                            {% csrf_token %}
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="content"
-                                    placeholder="type here to add task">
-                                <div class="input-group-append text-info">
-                                    <span class="input-group-text bg-white py-0">
-                                        <button type="submit" class="btn btn-sm text-info">
-                                            <i class="fa fa-plus-circle fa-lg"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </form>
+
 
                         <ul class="list-group">
+                            <li class="list-group-item">
+                                <form action="{% url 'add_task' %}" method="POST" autocomplete="off">
+                                    {% csrf_token %}
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="content"
+                                            placeholder="type here to add task">
+                                        <div class="input-group-append text-info">
+                                            <span class="input-group-text bg-white py-0">
+                                                <button type="submit" class="btn btn-sm text-info">
+                                                    <i class="fa fa-plus-circle fa-lg"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
                             {% for task in task_list %}
-                            <li class="list-group-item">{{ task.content }}</li>
+                            <li class="list-group-item">{{ task.content }}
+                                <form action="{% url 'delete_task' task.id %}" method="POST"
+                                    class="float-right d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn">
+                                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            {% empty %}
+                            <li class="list-group-item"><span class="font-italic">No tasks at the moment.</span></li>
                             {% endfor %}
                         </ul>
                     </div>

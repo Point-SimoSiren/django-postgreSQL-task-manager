@@ -7,5 +7,6 @@ from . import views
 urlpatterns = [
     path('list/', views.task_listing),
     path('tietoa/', views.tietoa),
-    path('insert_task/', views.insert_task_item, name='insert_task_item')
+    path('add_task/', views.add_task, name='add_task'),
+    path('delete_task/<int:task_id>', views.delete_task, name='delete_task')
 ]

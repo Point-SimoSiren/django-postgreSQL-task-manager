@@ -10,7 +10,12 @@ def task_listing(request):
 def tietoa(request):
     return HttpResponse('<h3>Django & postgreSQL app</h3>')
 
-def insert_task_item(request:HttpRequest):
+def add_task(request:HttpRequest):
     task = Task(content = request.POST['content'])
     task.save()
+    return redirect('/tasks/list/')
+
+def delete_task(request, task_id):
+    task_to_delete = Task.objects.get(id=task_id)
+    task_to_delete.delete()
     return redirect('/tasks/list/')
