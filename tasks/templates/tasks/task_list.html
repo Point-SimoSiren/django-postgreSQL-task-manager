@@ -26,11 +26,12 @@
                         <h1 class="display-5 text-info"><i class="fas fa-check-double "></i><span
                                 class="col-md-1"></span>
                             Task Manager</h1>
+
                     </div>
 
+                    <!-- ADD FORM-->
+
                     <div class="card-body">
-
-
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <form action="{% url 'add_task' %}" method="POST" autocomplete="off">
@@ -48,20 +49,41 @@
                                     </div>
                                 </form>
                             </li>
-                            {% for task in task_list %}
-                            <li class="list-group-item">{{ task.content }}
-                                <form action="{% url 'delete_task' task.id %}" method="POST"
-                                    class="float-right d-inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn">
-                                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
-                                    </button>
-                                </form>
-                            </li>
-                            {% empty %}
-                            <li class="list-group-item"><span class="font-italic">No tasks at the moment.</span></li>
-                            {% endfor %}
-                        </ul>
+
+                            <!-- FILTER FORM -->
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <form action="{% url 'filter_tasks' %}" method="POST" autocomplete="off">
+                                        {% csrf_token %}
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="content"
+                                                placeholder="search for tasks">
+                                            <div class="input-group-append text-info">
+                                                <span class="input-group-text bg-white py-0">
+                                                    <button type="submit" class="btn btn-sm text-info">
+                                                        <i class="fa fa-search fa-lg"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </li>
+                                {% for task in task_list %}
+                                <li class="list-group-item">{{ task.content }}
+                                    <form action="{% url 'delete_task' task.id %}" method="POST"
+                                        class="float-right d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn">
+                                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                                        </button>
+                                    </form>
+                                </li>
+                                {% empty %}
+                                <li class="list-group-item"><span class="font-italic">No tasks at the moment.</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
                     </div>
                 </div>
             </div>
