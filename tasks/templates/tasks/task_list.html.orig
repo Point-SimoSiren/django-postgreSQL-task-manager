@@ -1,0 +1,210 @@
+<<<<<<< HEAD
+{% load static %}
+<!-- .js ja css jos olisi määritetty sellaisia -->
+
+<!DOCTYPE html>
+
+<head>
+    <title>Tasks App with Django and Postgres</title>
+    <!-- <script src="./koodi.js" type="text/javascript"></script> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <!-- omat tyylit jos olisi määritetty -->
+    <link rel="stylesheet" href="{% static 'tasks/styles.css' %}">
+</head>
+
+<body class="bg-secondary">
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-10">
+
+                <div class="card">
+                    <div class="card-header shadow-sm bg-white">
+                        <h1 class="display-5 text-info"><i class="fas fa-check-double "></i><span
+                                class="col-md-1"></span>
+                            Task Manager</h1>
+
+                    </div>
+
+                    <!-- ADD FORM-->
+
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <form action="{% url 'add_task' %}" method="POST" autocomplete="off">
+                                    {% csrf_token %}
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="content"
+                                            placeholder="type here to add task">
+                                        <div class="input-group-append text-info">
+                                            <span class="input-group-text bg-white py-0">
+                                                <button type="submit" class="btn btn-sm text-info">
+                                                    <i class="fa fa-plus-circle fa-lg"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+
+                            <!-- FILTER FORM -->
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <form action="{% url 'filter_tasks' %}" method="POST" autocomplete="off">
+                                        {% csrf_token %}
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="content"
+                                                placeholder="search for tasks">
+                                            <div class="input-group-append text-info">
+                                                <span class="input-group-text bg-white py-0">
+                                                    <button type="submit" class="btn btn-sm text-info">
+                                                        <i class="fa fa-search fa-lg"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </li>
+                                {% for task in task_list %}
+                                <li class="list-group-item">{{ task.content }}
+                                    <form action="{% url 'delete_task' task.id %}" method="POST"
+                                        class="float-right d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn">
+                                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                                        </button>
+                                    </form>
+                                </li>
+                                {% empty %}
+                                <li class="list-group-item"><span class="font-italic">No tasks at the moment.</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+
+=======
+{% load static %}
+<!-- .js ja css jos olisi määritetty sellaisia -->
+
+<!DOCTYPE html>
+
+<head>
+    <title>Tasks App with Django and Postgres</title>
+    <!-- <script src="./koodi.js" type="text/javascript"></script> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <!-- omat tyylit jos olisi määritetty -->
+    <link rel="stylesheet" href="{% static 'tasks/styles.css' %}">
+</head>
+
+<body class="bg-secondary">
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-10">
+
+                <div class="card">
+                    <div class="card-header shadow-sm bg-white">
+                        <h1 class="display-5 text-info"><i class="fas fa-check-double "></i><span
+                                class="col-md-1"></span>
+                            Task Manager</h1>
+
+                    </div>
+
+                    <!-- ADD FORM-->
+
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <form action="{% url 'add_task' %}" method="POST" autocomplete="off">
+                                    {% csrf_token %}
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="content"
+                                            placeholder="type here to add task">
+                                        <div class="input-group-append text-info">
+                                            <span class="input-group-text bg-white py-0">
+                                                <button type="submit" class="btn btn-sm text-info">
+                                                    <i class="fa fa-plus-circle fa-lg"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+
+                            <!-- FILTER FORM -->
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <form action="{% url 'filter_tasks' %}" method="POST" autocomplete="off">
+                                        {% csrf_token %}
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="content"
+                                                placeholder="search for tasks">
+                                            <div class="input-group-append text-info">
+                                                <span class="input-group-text bg-white py-0">
+                                                    <button type="submit" class="btn btn-sm text-info">
+                                                        <i class="fa fa-search fa-lg"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </li>
+                                {% for task in task_list %}
+                                <li class="list-group-item">{{ task.content }}
+                                    <form action="{% url 'delete_task' task.id %}" method="POST"
+                                        class="float-right d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn">
+                                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                                        </button>
+                                    </form>
+                                </li>
+                                {% empty %}
+                                <li class="list-group-item"><span class="font-italic">No tasks at the moment.</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+
+>>>>>>> 6fe2a2b37d06a44756d262e730b6dca12a5e6193
+</html>
